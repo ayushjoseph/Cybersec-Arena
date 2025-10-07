@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global neon hacker theme accents */
+html, body, #root {
+  height: 100%;
+}
+body {
+  background-color: #0b0f1a;
+  color: #e2e8f0; /* slate-200 */
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px, 40px 40px;
+  background-position: 0 0, 0 0;
+}
+
+/* Subtle glitch text effect helper */
+.glitch {
+  position: relative;
+  text-shadow: 0 0 8px rgba(8,247,254,0.6), 0 0 12px rgba(246,8,247,0.4);
+}
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  mix-blend-mode: screen;
+}
+.glitch::before { color: #08f7fe; transform: translateX(-1px); opacity: .6; }
+.glitch::after { color: #f608f7; transform: translateX(1px); opacity: .5; }
