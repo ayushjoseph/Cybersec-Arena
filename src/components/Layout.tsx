@@ -1,15 +1,16 @@
+import { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { Shield, Trophy, Newspaper, User, Gamepad2, Cpu, ShieldAlert, Bug, Brain, Code, Mail, Terminal, BookOpen } from 'lucide-react';
+import { Shield, Trophy, Newspaper, User, Gamepad2, ShieldAlert, Brain, Code, Mail, Terminal, BookOpen, Sparkles } from 'lucide-react';
 import AudioControl from './AudioControl';
+import Matrix from './Matrix';
+import AICoach from './AICoach';
 
 const navItems = [
   { to: '/', label: 'Dashboard', icon: <Gamepad2 size={18} /> },
   { to: '/ctf', label: 'CTF Challenges', icon: <Terminal size={18} /> },
-  { to: '/business-cybersim', label: 'Business CyberSim', icon: <Cpu size={18} /> },
   { to: '/phish-hunt', label: 'Phish Hunt', icon: <Mail size={18} /> },
   { to: '/code-and-secure', label: 'Code & Secure', icon: <Code size={18} /> },
   { to: '/firewall-defender', label: 'Firewall Defender', icon: <ShieldAlert size={18} /> },
-  { to: '/malware-lab-escape', label: 'Malware Lab Escape', icon: <Bug size={18} /> },
   { to: '/ai-quizbot', label: 'AI Cyber QuizBot', icon: <Brain size={18} /> },
   { to: '/leaderboard', label: 'Leaderboard', icon: <Trophy size={18} /> },
   { to: '/news', label: 'News Feed', icon: <Newspaper size={18} /> },
@@ -18,6 +19,7 @@ const navItems = [
 ];
 
 export default function Layout() {
+  const [coachOpen, setCoachOpen] = useState(false);
   return (
     <div className="min-h-screen bg-[#0b0f1a] text-slate-200 grid md:grid-cols-[260px_1fr]">
       {/* Sidebar */}
@@ -62,12 +64,19 @@ export default function Layout() {
               <span className="text-cyan-400">CyberSec</span> <span className="text-fuchsia-400">Arena</span>
             </div>
           </div>
-          <AudioControl />
+          <div className="flex items-center gap-2">
+            <button onClick={() => setCoachOpen(true)} className="px-2 py-1 text-xs rounded bg-fuchsia-500/10 text-fuchsia-300 border border-fuchsia-400/30 flex items-center gap-1">
+              <Sparkles size={14} /> Coach
+            </button>
+            <AudioControl />
+          </div>
         </header>
         <div className="relative p-6">
+          <Matrix />
           <div className="absolute inset-0 -z-10 opacity-[0.08]" style={{ background: 'radial-gradient(circle at 20% 10%, #08f7fe 0%, transparent 25%), radial-gradient(circle at 80% 30%, #f608f7 0%, transparent 25%)' }} />
           <Outlet />
         </div>
+        {coachOpen && <AICoach onClose={() => setCoachOpen(false)} />}
       </main>
     </div>
   );

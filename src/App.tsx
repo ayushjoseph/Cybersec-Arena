@@ -2,11 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import CTF from './pages/CTF';
-import BusinessCyberSim from './pages/BusinessCyberSim';
 import PhishHunt from './pages/PhishHunt';
 import CodeAndSecure from './pages/CodeAndSecure';
 import FirewallDefender from './pages/FirewallDefender';
-import MalwareLabEscape from './pages/MalwareLabEscape';
 import AICyberQuizBot from './pages/AICyberQuizBot';
 import Leaderboard from './pages/Leaderboard';
 import NewsFeed from './pages/NewsFeed';
@@ -21,11 +19,9 @@ function App() {
         <Route element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="ctf" element={<CTF />} />
-          <Route path="business-cybersim" element={<BusinessCyberSim />} />
           <Route path="phish-hunt" element={<PhishHunt />} />
           <Route path="code-and-secure" element={<CodeAndSecure />} />
           <Route path="firewall-defender" element={<FirewallDefender />} />
-          <Route path="malware-lab-escape" element={<MalwareLabEscape />} />
           <Route path="ai-quizbot" element={<AICyberQuizBot />} />
           <Route path="leaderboard" element={<Leaderboard />} />
           <Route path="news" element={<NewsFeed />} />

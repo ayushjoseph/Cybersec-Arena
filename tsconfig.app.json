@@ -20,5 +20,10 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": [
+    "src/pages/BusinessCyberSim.tsx",
+    "src/pages/MalwareLabEscape.tsx",
+    "src/data/business.ts"
+  ]
 }

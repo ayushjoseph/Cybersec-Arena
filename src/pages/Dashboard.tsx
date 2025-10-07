@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
+import { useProgress, overallPercent } from '../lib/progress';
 
 const cards = [
   { to: '/ctf', title: 'CTF Challenges', desc: 'Web, Crypto, Forensics, Reverse, Binary' },
-  { to: '/business-cybersim', title: 'Business CyberSim', desc: 'Simulate incidents, budgets, and compliance' },
   { to: '/phish-hunt', title: 'Phish Hunt', desc: 'Investigate emails and links' },
   { to: '/code-and-secure', title: 'Code & Secure', desc: 'Fix vulnerable code and learn secure patterns' },
   { to: '/firewall-defender', title: 'Firewall Defender', desc: 'Tower defense with IDS/IPS strategy' },
-  { to: '/malware-lab-escape', title: 'Malware Lab Escape', desc: 'Puzzle out malware behaviors' },
   { to: '/ai-quizbot', title: 'AI Cyber QuizBot', desc: 'Adaptive quiz with explanations' },
 ];
 
 export default function Dashboard() {
-  const progress = 24; // stub progress
+  const { state } = useProgress();
+  const percent = overallPercent(state);
   return (
     <div className="space-y-6">
       <div>
@@ -40,9 +40,16 @@ export default function Dashboard() {
       <section className="border border-slate-800 rounded-lg p-4 bg-white/[0.03]">
         <h2 className="font-semibold text-fuchsia-300">Your Progress</h2>
         <div className="mt-2 h-2 bg-slate-800 rounded">
-          <div className="h-full bg-gradient-to-r from-cyan-400 to-fuchsia-500 rounded" style={{ width: `${progress}%` }} />
+          <div className="h-full bg-gradient-to-r from-cyan-400 to-fuchsia-500 rounded" style={{ width: `${percent}%` }} />
         </div>
-        <p className="text-xs text-slate-400 mt-1">{progress}% complete • badges: 3 • rank: Rookie</p>
+        <p className="text-xs text-slate-400 mt-1">{percent}% complete • badges: {state.badges.length} • rank: Rookie</p>
+        {state.badges.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-2">
+            {state.badges.map((b) => (
+              <span key={b} className="px-2 py-0.5 text-xs rounded border border-cyan-400/30 text-cyan-300 bg-cyan-500/10">{b}</span>
+            ))}
+          </div>
+        )}
       </section>
     </div>
   );
